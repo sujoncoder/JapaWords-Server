@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import authRouter from "./routes/auth.routes.js";
+import userRouter from "./routes/user.routes.js";
 
 
 // EXTRACT APP FROM EXPRESS
@@ -28,6 +29,7 @@ app.get("/hello", (req, res) => {
 
 // APPLICATION ROUTE
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", userRouter);
 
 
 // HANDLE CLIENT ROUTE

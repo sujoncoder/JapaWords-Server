@@ -3,8 +3,14 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
+import authRouter from "./routes/auth.routes.js";
+
+
+// EXTRACT APP FROM EXPRESS
 const app = express();
 
+
+// APPLICATION MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
@@ -21,6 +27,7 @@ app.get("/hello", (req, res) => {
 });
 
 // APPLICATION ROUTE
+app.use("/api/v1/auth", authRouter);
 
 
 // HANDLE CLIENT ROUTE

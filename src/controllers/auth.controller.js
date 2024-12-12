@@ -149,5 +149,58 @@ export const accountVerifyOtp = async (req, res) => {
             message: error.message
         });
     }
+};
 
+
+// USER LOGIN CONTROLLER
+export const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({
+            success: false,
+            message: "Email aad Password fields are required !"
+        });
+    };
+
+    try {
+        // check exist user
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found !"
+            });
+        };
+
+        // match the password
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return res.status(400).json({
+                success: false,
+                message: "Incorrect Password !"
+            });
+        };
+
+        // generate a token
+        const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "7d" });
+
+        // token se in the cookie
+        res.cookie("accessToken", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production" ? true : false,
+            samesite: process.env.NODE_ENV === "production" ? "none" : "strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "User loggedin successfully."
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
 };

@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/constants.js";
+import { EMAIL_VERIFY_TEMPLATE } from "../config/emailTemplates/emailVerifyTemplate.js";
 import UserModel from "../models/user.model.js";
+import transporter from "../config/nodemailer.js";
 
 
 // IS LOGGEDIN MIDDLEWARE

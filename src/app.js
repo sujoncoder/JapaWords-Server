@@ -39,8 +39,8 @@ app.use((req, res, next) => {
 });
 
 // APPLICATION ROUTE
-app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/users", userRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
 
 
 // HANDLE CLIENT ROUTE

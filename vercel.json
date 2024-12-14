@@ -18,10 +18,6 @@
                 "DELETE",
                 "OPTIONS"
             ]
-        },
-        {
-            "src": "/(.*)",
-            "dest": "src/server.js"
         }
     ]
 }

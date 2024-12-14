@@ -154,7 +154,6 @@ export const accountVerify = async (req, res) => {
 
 
 // USER LOGIN CONTROLLER
-// USER LOGIN CONTROLLER
 export const login = async (req, res) => {
     const { email, password } = req.body;
 
